@@ -476,3 +476,19 @@ Sign:  [y/N]: y
 ```
 
 ### Interact with a deployed contract 
+
+Once we deploy the smart contract, we can interact with it directly from the console or from a script. 
+
+From the console, we can recall a deployed smart contact from its address. So start the console with the usual 
+
+```bash
+ape console --network ethereum:goerli:chainstack 
+```
+
+And create a contract instance by recalling its address. 
+
+```bash
+In [1]: contract = Contract(“0xa15fddEE05b12804797B16345F8d8DeaF7d285A1”) 
+```
+
+Now we can interact with the contract precisely as we did earlier when we [deployed the contract directly from the console](#use-the-console-to-interact-with-your-smart-contract)
