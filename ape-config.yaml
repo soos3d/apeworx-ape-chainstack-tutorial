@@ -1,0 +1,6 @@
+name: save_string
+contracts_folder: contracts
+plugins:
+  - name: solidity
+    version: 0.4.0
+  - name: chainstack
