@@ -1,4 +1,4 @@
-# rename this to deploy.py and rename the other filed to something else in case you want to use this one. 
+# rename this to deploy.py and rename the other deploy.py to something else in case you want to use this one. 
 
 from ape import accounts, project
 
