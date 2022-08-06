@@ -2,7 +2,7 @@
 
 This repo contains an Ape project and the tutorial shows you how to install the Ape framework, the Chainstack plugin, and how to deploy and interact with smart contracts. 
 
-This tutorial is based on this [Ape tutorial from the Chainstack blog]().
+This tutorial is based on this [Ape tutorial from the Chainstack blog](). (link to be added when the article is live)
 
 ## Table of contents
 
