@@ -4,6 +4,29 @@ This repo contains an Ape project and the tutorial shows you how to install the 
 
 This tutorial is based on this [Ape tutorial from the Chainstack blog]().
 
+## Table of contents
+
+- [ApeWorX Ape tutorial using the Chainstack plugin](#apeworx-ape-tutorial-using-the-chainstack-plugin)
+  - [Install the Ape framework and dependencies](#install-the-ape-framework-and-dependencies)
+    - [Requirements](#requirements)
+    - [Dependencies](#dependencies)
+    - [Installation](#installation)
+    - [Virtual environment](#virtual-environment)
+    - [Install the Ape framework](#install-the-ape-framework)
+    - [Install project's dependencies](#install-projects-dependencies)
+  - [Getting familiar with the Ape console](#getting-familiar-with-the-ape-console)
+    - [Set up the endpoint URL](#set-up-the-endpoint-url)
+    - [Create and import accounts](#create-and-import-accounts)
+    - [Make transfers between accounts](#make-transfers-between-accounts)
+  - [Create a project with Ape](#create-a-project-with-ape)
+    - [Deploy a smart contract from the console](#deploy-a-smart-contract-from-the-console)
+    - [Use the console to interact with your smart contract](#use-the-console-to-interact-with-your-smart-contract)
+    - [Deploy a smart contract from a script](#deploy-a-smart-contract-from-a-script)
+    - [Interact with a deployed contract](#interact-with-a-deployed-contract)
+      - [Interact from the console](#interact-from-the-console)
+      - [Interact from a script](#interact-from-a-script)
+  - [Conclusion](#conclusion)
+
 ## Install the Ape framework and dependencies 
 
 ### Requirements
@@ -91,6 +114,16 @@ For this tutorial you'll need to install the [Chainstack](https://github.com/Ape
 ```bash
 ape plugins install chainstack solidity
 ```
+Verify that you have the correct plugins installed:
+
+```bash
+ape plugins list
+
+Installed Plugins:
+  solidity      0.4.0
+  chainstack    0.4.0a1
+```
+
 
 ## Getting familiar with the Ape console
 
@@ -479,6 +512,8 @@ Sign:  [y/N]: y
 
 Once we deploy the smart contract, we can interact with it directly from the console or from a script. 
 
+#### Interact from the console
+
 From the console, we can recall a deployed smart contact from its address. So start the console with the usual 
 
 ```bash
@@ -492,3 +527,94 @@ In [1]: contract = Contract(“0xa15fddEE05b12804797B16345F8d8DeaF7d285A1”)
 ```
 
 Now we can interact with the contract precisely as we did earlier when we [deployed the contract directly from the console](#use-the-console-to-interact-with-your-smart-contract)
+
+#### Interact from a script 
+
+We can also make scripts to interact with our contracts; we can place them in the scripts folder and run them with the ape run command if we create a function and call it in the command.  
+
+The following code is a simple script to interact with the SimpleStorage contract. Remember that this is a Python-based framework, so we can leverage the Python code. The script works like this:  
+
+1. Prompt the user to pick which account to use.  
+
+1. Displays the address of the latest SimpleContract contract deployed.  
+
+1. Prompt the user to input a string to save in the smart contract and calls the `saveWord()` function.  
+
+1. After the transaction is confirmed, it calls the `getWord()` function and displays the string we saved. 
+
+
+```py
+from ape import project
+from ape.cli import get_user_selected_account
+
+def simpleStorage_interact():
+    # The CLI will ask which account to use
+    dev_account = get_user_selected_account()
+    print(f'The account balance is: {dev_account.balance / 1e18} Goerli ETH') 
+
+    # Initialize latest deployed contract
+    simple_storage= project.SimpleStorage.deployments[-1]    
+    print(f'The latest SimpleStorage contract is deployed at: {simple_storage.address}')
+
+    # Prompt the user to input a string to save 
+    string_to_save = input("Type the string to save: ")
+    
+    print("Saving the string, please sign the transaction when prompted.")
+    simple_storage.setWord(string_to_save, sender=dev_account)
+
+    # Retrive and display the saved string 
+    print(f'The saved string is: {simple_storage.getWord()}')
+
+def main():
+    simpleStorage_interact()
+```
+
+Once saved in the scripts folder, run the following command from the project root in the terminal. 
+
+```bash
+ape run simpleStorage_interact --network ethereum:goerli:chainstack 
+```
+
+We call the function `simpleStorage_interact()` directly from the terminal, which will look like this. 
+
+```bash
+0. chainstack 
+1. test   
+
+Select an account: 0 
+The account balance is: 0.648355782477259 Goerli ETH 
+The latest SimpleStorage contract is deployed at: 0x5c5799e815a2686Cbe47003D83188E22E0493964 
+
+Type the string to save: Chainstack is cool     
+Saving the string, please sign the transaction when prompted.  
+
+DynamicFeeTransaction: 
+  chainId: 5 
+  to: 0x5c5799e815a2686Cbe47003D83188E22E0493964 
+  from: 0xB6a6b3096e2E90780b745c676b842b9D2F657540 
+  gas: 44706 
+  nonce: 11 
+  value: 0 
+  data: 0xcd048d...000000 
+  type: 0x02 
+  maxFeePerGas: 1000000014 
+  maxPriorityFeePerGas: 1000000000 
+  accessList: []   
+
+Sign:  [y/N]: y 
+Enter passphrase to unlock 'chainstack' []:  
+Leave 'chainstack' unlocked? [y/N]: y 
+INFO: Submitted 0x58eed7f8bdd2a2f098ca6bdffe9a5ed66f5c366931e78eaf2f5bebc8d4fa3a6c 
+Confirmations (2/2): 100%|████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:29<00:00, 14.72s/it] 
+
+INFO: Confirmed 0x58eed7f8bdd2a2f098ca6bdffe9a5ed66f5c366931e78eaf2f5bebc8d4fa3a6c (total fees paid = 44706000625884) 
+The saved string is: Chainstack is cool 
+```
+
+## Conclusion
+
+The Ape framework is gaining traction and will become more popular as more people learn how easy it makes to develop smart contracts once it’s set up.   
+
+This guide should get you up and running to create projects using Ape and gives you a few different options to deploy and interact with your smart contracts.   
+
+I would say the most straightforward way is through the console directly, but creating and running scripts can be a fun way to do it as well! 
