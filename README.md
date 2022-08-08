@@ -170,6 +170,14 @@ Found 2 accounts:
   0xB6a6b3096e2E90780b745c676b842b9D2F657540 (alias: 'chainstack') 
   0x82D78356b4D18e0f24D56bE752454728d80C9897 (alias: 'test') 
 ```
+Ape allows us to also import accounts, so this is useful in case you already have accounts with funds and want to use them for your development.
+
+To import an account, use the `ape accounts import <ACCOUNT_NAME>` command; you just need the account’s private key. The console will then prompt you to input a passphrase for you to use to sign transactions.
+
+```bash
+ape accounts import my_ape_account
+Enter Private Key:
+```
 
 Now we can activate the console, query the balance, make transfers, and more.
 
