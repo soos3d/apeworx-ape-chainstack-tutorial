@@ -59,9 +59,21 @@ Verify the Python version installed:
 Python3 --version
 ```
 
+Install PIP in case it wasn't already installed. 
+
+```sh
+sudo apt install python3-pip
+```
+
 ### Virtual environment
 
 It is recommended to operate in a virtual environment; you will need to [install Ape](https://github.com/ApeWorX/ape#installation) in the virtual environment if you decide to use one.
+
+Install `virtualenv` to create virtual environment.
+
+```sh
+sudo pip install virtualenv
+```
 
 Create a virtual environment.
 
