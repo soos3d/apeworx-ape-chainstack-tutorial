@@ -1,8 +1,8 @@
 # ApeWorX Ape tutorial using the Chainstack plugin
 
-This repo contains an Ape project and the tutorial shows you how to install the Ape framework, the Chainstack plugin, and how to deploy and interact with smart contracts. 
+This repo contains an Ape project and the tutorial shows you how to install the Ape framework, the Chainstack plugin, and how to deploy and interact with smart contracts. Find Ape on the [Chainstack marketplace](https://chainstack.com/marketplace/ape/).
 
-This tutorial is based on this [Ape tutorial from the Chainstack blog](). (link to be added when the article is live)
+This tutorial is based on this [Ape tutorial from the Chainstack blog](https://chainstack.com/apeworx-ape-framework-what-is-it-and-how-to-use-it/).
 
 ## Table of contents
 
@@ -156,7 +156,7 @@ export CHAINSTACK_GOERLI_URL=https://nd-11X-26X-16X.p2pify.com/YOUR_API_KEY
 ```
 
 ```bash
-Echo $ export CHAINSTACK_GOERLI_URL 
+Echo $CHAINSTACK_GOERLI_URL 
 ```
 
 And it will return your endpoint URL if it is set up correctly. 
